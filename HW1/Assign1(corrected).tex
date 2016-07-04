@@ -1,0 +1,272 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{nccmath}
+\usepackage{mathtools}
+\usepackage{array}
+
+\setlength{\textwidth}{15cm} \setcounter{page}{159}
+
+\begin{document}
+
+
+\title{\textbf{Non-convex Optimization for Analyzing Big Data}\\
+\medskip
+\text{Assignment 2}}
+
+\author{Zhiwei Han}
+\date{May 22, 2016}
+\maketitle
+
+
+\setlength{\parindent}{0pt} \setlength{\parskip}{2ex plus 0.5ex
+minus 0.2ex}
+
+
+\section*{Task 1}
+
+\subsection*{1.1}
+Assume that $\mathbf{A}$ is symmetric.\\\\
+(1) conjugate symmetry\\
+$ \langle\mathbf{X},\mathbf{Y}\rangle_\mathbf{A} 
+ = tr(\mathbf{XAY^T})
+ = tr((\mathbf{XAY^T})^\mathbf{T}))
+ = tr(\mathbf{YAX^T})
+ = \langle\mathbf{Y,X}\rangle_\mathbf{A}
+ = \overline{\langle\mathbf{Y,X}\rangle}_\mathbf{A}$\\\\
+(2) non-negativity\\
+$ \langle\mathbf{X},\mathbf{X}\rangle_\mathbf{A}
+ = tr(\mathbf{XAX^T})
+ = \sum_{i=1}^{m}\mathbf{x_i^{T}Ax_i} > 0, \mathbf{X \neq 0}\\
+  \langle\mathbf{X,X}\rangle_\mathbf{A}
+ = 0 \quad \text{iff}\quad \mathbf{X=0}$\\\\
+(3) linearity in the first argument\\
+$ \langle\mathbf{\alpha X+\beta Y,Z}\rangle_\mathbf{A}
+ = tr((\mathbf{\alpha X+\beta Y)AZ^T})
+ = tr(\mathbf{\alpha XAZ^T+\beta YAZ^T})\\
+ =\alpha\langle\mathbf{X,Z}\rangle_\mathbf{A}+\beta\langle\mathbf{Y,Z}\rangle_\mathbf{A}$\\\\
+
+\subsection*{1.2}
+First it's easy to check that $H_1\oplus H_2$ is an Abelian group together with scalar\\ product over field $\mathbb{Z}$ which satisfies the corresponding axioms. So $H_1\oplus H_2$ is a vector space.\\
+Next show that $\langle\cdot,\cdot\rangle_{H_1 \oplus H_2}$ is an inner product.\\\\
+(1) conjugate symmetry\\
+$ \langle (x_1,x_2),(y_1,y_2)\rangle_{H_1\oplus H_2}
+ = \langle x_1,y_1 \rangle_{H_1} + \langle x_2,y_2 \rangle_{H_2}
+ = \overline{\langle y_1,x_1 \rangle}_{H_1} + \overline{\langle y_2,x_2 \rangle}_{H_2}\\
+ = \overline{\langle (y_1,y_2),(x_1,x_2) \rangle}_{H_1 \oplus H_2}$\\\\
+(2) non-negativity\\
+$ \langle (x_1,x_2),(x_1,x_2) \rangle_{H_1 \oplus H_2}
+ = \langle x_1,x_1 \rangle_{H_1} + \langle x_2,x_2 \rangle_{H_2} \geq 0\\
+  \langle (x_1,x_2),(x_1,x_2) \rangle_{H_1 \oplus H_2} = 0 \quad \text{iff}\quad (x_1,x_2)=(0,0)$\\\\
+(3) linearity in the first argument\\
+$ \langle\alpha (x_1,x_2) + \beta (y_1,y_2), (z_1,z_2) \rangle_{H_1\oplus H_2}
+ = \langle\alpha x_1 + \beta y_1, z_1 \rangle_{H_1} + \langle\alpha x_2 + 
+   \beta y_2, z_2 \rangle_{H_2}\\
+ = \alpha ( \langle x_1,z_1 \rangle_{H_1} + \langle x_2,z_2 \rangle_{H_2} ) 
+   + \beta ( \langle y_1,z_1 \rangle_{H_1} + \langle y_2,z_2 \rangle_{H_2} )\\
+ = \alpha \langle (x_1,x_2),(z_1,z_2) \rangle_{H_1\oplus H_2}
+   + \beta \langle (y_1,y_2),(z_1,z_2) \rangle_{H_1\oplus H_2} $\\\\
+
+The orthogonal complement of $S=\{(x_1,0):x_1\in H_1\}$ is $\{(0,x_2):x_2\in H_2\}$.\\\\
+\textit{proof}: Let $S^\bot=\{(x,y)\in H_1 \oplus H_2: \langle (x,y),(x_1,0) \rangle_{H_1 \oplus H_2}=0,\: \forall x_1 \in H_1 \}$, \\ 
+$S_1=\{(0,x_2):x_2\in H_2\}$, show that $S_1=S^\bot$.\\\\
+(1) $S_1 \subseteq S^\bot$\\
+$\forall (0,x_2)\in H_2,\quad \langle (x_1,0),(0,x_2) \rangle_{H_1 \oplus H_2} 
+ = \langle x_1,0 \rangle_{H_1} + \langle 0,x_2 \rangle_{H_2},\: \forall x_1 \in H_1$\\\\
+(2) $S^\bot \subseteq S_1$\\
+$\forall (x,y)\in H_1 \oplus H_2,$ since $\langle (x,y),(x_1,0) \rangle_{H_1 \oplus H_2} = \langle x,x_1 \rangle_{H_1} + \langle y,0 \rangle_{H_2}=$\\
+$\langle x,x_1 \rangle_{H_1}=0, \: \forall x_1 \in H_1$, it must hold that $x=0$
+
+\subsection*{1.3}
+\textbf{a)}\\
+$P_2$ forms an Abelian multiplicative group and this group together with scalar\\ product forms a vector space.\\\\
+(1) conjugate symmetry\\
+$\langle p,q \rangle = \sum_{i=-1}^1 p(i)q(i) = \sum_{i=-1}^1 q(i)p(i) = \overline{\langle q,p \rangle}$\\\\
+(2) non-negativity\\
+Suppose $p(x)=c_0+c_1 x+c_2 x^2$,\\
+$\langle p,q\rangle=(c_0-c_1+c_2)^2+c_0^2+(c_0+c_1+c_2)^2 \geq 0$\\
+$\langle p,p\rangle=0 \quad \text{iff}\quad c_0=c_1=c_2=0, \: \text{i.e.} \: p=0$\\\\
+(3) linearity in the first argument\\
+$\langle \alpha p+\beta q,r\rangle 
+ = \sum_{i=-1}^1 (\alpha p+\beta q)(i)r(i)
+ = \sum_{i=-1}^1 (\alpha p(i)+\beta q(i))r(i)\\
+ = \alpha \sum_{i=-1}^1 p(i)r(i) + \beta \sum_{i=-1}^1 q(i)r(i)
+ = \alpha \langle p,r\rangle + \beta \langle q,r\rangle$\\\\
+
+\textbf{b)}\\
+Suppose $p\in P_3, \: p(x)=c_0+c_1 x+c_2 x^2+c_3 x^3$\\
+$\langle p,p\rangle = (c_0-c_1+c_2-c_3)^2+c_0^2+(c_0+c_1+c_2+c_3)^2=0 
+\nRightarrow c_0=c_1=c_2=c_3=0$\\
+Hence $\langle p,p\rangle=0 \nRightarrow p=0$, the inner product defined in $(2)$ is 
+not an inner product for $P_3$.\\\\
+
+\section*{Task 2}
+
+\subsection*{2.1}
+First show that the directional derivatives exist for every $(u,w)\in \mathbb{R}^2$
+ at $(0,0)$.\\\\
+(1) $w=0$\\
+$\frac{d}{dt}|_{t=0}f(0+tu,0+tw)=\frac{d}{dt}|_{t=0}f(tu,0)=u$\\\\
+(2) $w>0$\\
+$\frac{d}{dt}|_{t=0^+}f(0+tu,0+tw) = \lim_{t\to 0^+}\frac{f(0+tu,0+tw)-f(0,0)}{t}
+ = \lim_{t\to 0^+}\frac{t\sqrt{u^2+w^2}}{t} = \sqrt{u^2+w^2}$\\
+$\frac{d}{dt}|_{t=0^-}f(0+tu,0+tw) = \lim_{t\to 0^-}\frac{f(0+tu,0+tw)-f(0,0)}{t}
+ = \lim_{t\to 0^-}\frac{-|t|\sqrt{u^2+w^2}}{t} = \sqrt{u^2+w^2}$\\
+$\frac{d}{dt}|_{t=0}f(0+tu,0+tw) = \sqrt{u^2+w^2}$\\\\
+(3) $w<0$\\
+Similarly $\frac{d}{dt}|_{t=0}f(0+tu,0+tw) = -\sqrt{u^2+w^2}$\\
+
+Hence every directional derivative of $f$ exists at $(0,0)$.\\
+\[
+\frac{d}{dt}|_{t=0}f(0+tu,0+tw)=
+\begin{cases}
+& u, \qquad\qquad\:\: w=0\\
+& \sqrt{u^2+w^2}, \quad w>0\\
+& -\sqrt{u^2+w^2}, \: w<0\\
+\end{cases}
+\]
+
+Next show that $f$ is not differentiable at $(0,0)$. \\\\
+Let $x_0=(0,0), \: v_1=(u,w), \: v_2=(u,-w), \: u,w \in \mathbb{R}, \:u,w>0$.
+Suppose $f$ is differentiable at $x_0$ with derivative $Df(x_0)$.
+The directional derivative of $f$ at $x_0$ along $v_1+v_2=(2u,0)$ is\\
+\begin{center}
+	$D_{v_1+v_2}f(x_0) = 2u > 0$
+\end{center}
+However, using the linearity of $Df(x_0)$ we can derive that
+\begin{center}
+$D_{v_1+v_2}f(x_0) = Df(x_0)[v_1+v_2] = Df(x_0)[v_1] + Df(x_0)[v_2]$\\ \vspace{1em}
+$=D_{v_1}f(x_0)+D_{v_2}f(x_0) = \sqrt{u^2+w^2}-\sqrt{u^2+w^2}=0$\\
+\end{center}
+which leads to a contradiction. So $f$ is not differentiable at $x_0=(0,0)$\\\\
+
+\subsection*{2.2}
+$f(x,y)$ is continuous on $\mathbb{R}^2$\textbackslash$(0,0)$, so it suffice to prove that it is also continuous at $(0,0)$. At $(0,0)$, $\forall \epsilon > 0$ exists an open neighbourhood 
+$\{(x,y)|\sqrt{x^2+y^2}<2\epsilon\}$ such that
+\begin{center}
+	$|f(x,y)-f(0,0)|=|\frac{xy}{\sqrt{x^2+y^2}}-0|\leq\frac{\frac{1}{2}(x^2+y^2)}{\sqrt{x^2+y^2}}<\epsilon$\\
+\end{center}
+So $f$ is continuous on $\mathbb{R}^2$.\\\\
+\begin{center}
+$\frac{\partial f}{\partial x}=\begin{cases}
+								& \frac{\partial}{\partial x}f(x,0),\: y=0\\
+								& \frac{\partial}{\partial x}f(x,y),\: y\neq 0
+								\end{cases}$ \hspace{1em}
+$=\begin{cases}
+& 0,\quad\quad\quad\quad\quad\quad y=0\\
+& y^3(x^2+y^2)^{-\frac{3}{2}},\:\: y\neq 0
+\end{cases}$\\ \vspace{2em}
+\end{center}
+Similarly 
+$\frac{\partial f}{\partial y}=\begin{cases}
+								& 0,\quad\quad\quad\quad\quad\quad x=0\\
+								& x^3(x^2+y^2)^{-\frac{3}{2}},\:\: x\neq 0
+\end{cases}$\\\\\\
+So $f$ is partially differentiable.\\\\
+Finally we show that $f$ is not differentiable at $(0,0)$ so it cannot be differentiable.\\
+Suppose $f$ is differentiable at $(0,0)$, then\\
+\begin{center}
+$\nabla f(0,0)=\left[ \begin{array}{cc}
+							\frac{\partial f}{\partial x}|_{(0,0)}\\
+							\frac{\partial f}{\partial y}|_{(0,0)}
+						\end{array}
+				\right] = \left[ \begin{array}{c}
+									0\\
+									0
+									\end{array}
+							\right]$\\
+\end{center}
+\newpage
+\begin{flushleft}
+$\lim_{(x,y)\to (0,0)}\frac{f(x,y)-f(0,0)-\nabla^T f(0,0)(\begin{bsmallmatrix}x\\y\end{bsmallmatrix}-\begin{bsmallmatrix}0\\0\end{bsmallmatrix})}{\|\begin{bsmallmatrix}x\\y\end{bsmallmatrix}-\begin{bsmallmatrix}0\\0\end{bsmallmatrix}\|_2}$\\
+$=\lim_{(x,y)\to (0,0)}\frac{xy}{x^2+y^2}$\\ \vspace{1em}
+If we take sequence $\{(x_n,y_n)\}=\{(\frac{1}{n},\frac{1}{n})\}\,\to\,(0,0)$, then\\
+\end{flushleft}
+\begin{center}
+$\lim_{(x,y)\to (0,0)}\frac{xy}{x^2+y^2}=\frac{1}{2}\neq 0$
+\end{center}
+So $f$ cannot be well-approximated by a linear map at $(0,0)$, hence it is not differentiable at $(0,0)$.
+	
+
+
+\subsection*{2.3}
+Choose inner product $\langle \mathbf{A,B}\rangle = tr(\mathbf{B^H A})$\\ \\
+$\frac{d}{dt}|_{t=0}f(\mathbf{U,V}+t\mathbf{H})$\\\\ 
+$= \frac{d}{dt}|_{t=0}[\,\langle \mathbf{U(V}+t\mathbf{H)^T-Y},
+\mathbf{U(V}+t\mathbf{H)^T-Y}\rangle + \frac{\lambda}{2}\langle \mathbf{U,U}\rangle
++ \frac{\lambda}{2}\langle \mathbf{V+}t\mathbf{H,V+}t\mathbf{H}\rangle\,]\\\\
+ = 2\langle \mathbf{UH^T,UV^T-Y}\rangle + \lambda\langle \mathbf{H,V}\rangle\\\\
+ = 2\langle \mathbf{H,(UV^T-Y)^T U}\rangle + \lambda\langle \mathbf{H,V}\rangle\\\\
+ = \langle \mathbf{H,2(UV^T-Y)^T U+\lambda\mathbf{V}}\rangle$\\
+ 
+\subsection*{2.4}
+\begin{flushleft}
+$D_{[u,v,w]}\mathbf{f}(x_0,y_0,z_0)=\frac{d}{dt}|_{t=0}\mathbf{f}(x_0+tu,y_0+tv,z_0+tw)$\\
+\vspace{1em}
+$ =\left[ \begin{array}{ccc}
+		 \frac{d}{dt}|_{t=0}[e^{x_0+tu+z_0+tw}+(x_0+tu)^2(y_0+tv)]\\
+		 \frac{d}{dt}|_{t=0}[(y_0+tv)^2+(z_0+tw)^2+(x_0+tu)]
+	    \end{array}
+ \right]$
+
+$ =\left[ \begin{array}{ccc}
+		 e^{x_0+z_0}(u+w)+2ux_0 y_0+vx_0^2\\
+		 2vy_0+2wz_0+u
+		 \end{array}
+ \right]$
+ 
+$ =\left[ \begin{array}{ccc}
+		 e^{x_0+z_0}+2x_0 y_0 & x_0^2 & e^{x_0+z_0}\\
+		 1 & 2y_0 & 2z_0
+		 \end{array}
+ \right] \left[ \begin{array}{ccc}
+				 u\\
+				 v\\
+				 w
+	     \end{array}
+		 \right]$
+\end{flushleft}
+
+\begin{flushleft}
+$D\mathbf{f}(x_0,y_0,z_0)= \left[ 	\begin{array}{ccc}
+							e^{x_0+z_0}+2x_0 y_0 & x_0^2 & e^{x_0+z_0}\\
+							1 & 2y_0 & 2z_0
+							\end{array}
+					\right]$
+\end{flushleft}
+
+It's easier to to obtain $D\mathbf{f}$ by calculating the Jacobian of $\mathbf{f}$.\\
+\begin{flushleft}
+$D\mathbf{f}(x_0,y_0,z_0)= \mathbf{J}|_{x_0,y_0,z_0} 
+=[\frac{d\mathbf{f}}{dx}\:\frac{d\mathbf{f}}{dy}\:\frac{d\mathbf{f}}{dz}]|_{(x_0,y_0,z_0)}$
+$= \left[ 	\begin{array}{ccc}
+			e^{x_0+z_0}+2x_0 y_0 & x_0^2 & e^{x_0+z_0}\\
+			1 & 2y_0 & 2z_0
+			\end{array}
+  \right]$
+\end{flushleft}
+
+\subsection*{2.5}
+Consider the directional derivative of $\mathbf{f}$ along direction $\mathbf{V}\in\mathbb{R}^{m\times n}$.\\
+\begin{flushleft}
+$ \frac{d}{dt}|_{t=0}\mathbf{f}(\mathbf{X}+t\mathbf{V})$\\ \vspace{1em}
+$=\frac{d}{dt}|_{t=0}[(\mathbf{X}+t\mathbf{V})\mathbf{A}(\mathbf{X}+t\mathbf{V})^\mathbf{T}-(\mathbf{X}+t\mathbf{V})\mathbf{B}]$\\ \vspace{1em}
+$ = \mathbf{VAX^T+XAV^T-VB}$\\ \vspace{2em}
+$D\mathbf{f}:\mathbb{R}^{m\times n}\rightarrow 
+\mathcal{L}(\mathbb{R}^{m\times n},\mathbb{R}^{m\times m}),\:\mathbf{X} \mapsto D\mathbf{f(X)}$ \\ \vspace{1em}
+$D\mathbf{f(X)[\:\cdot\:]} = \mathbf{[\:\cdot\:]AX^T+XA[\:\cdot\:]^T-[\:\cdot\:]B}$
+\end{flushleft}
+Check that $D\mathbf{f}$ is indeed the differential map.\\
+\begin{flushleft}
+$\lim_{\mathbf{X}\to\mathbf{X}_0}\frac{\mathbf{f(X)}-\mathbf{f}(\mathbf{X}_0)-D\mathbf{f}(\mathbf{X}_0)[\mathbf{X}-\mathbf{X}_0]}{\|\mathbf{X}-\mathbf{X}_0\|}$\\ \vspace{1em}
+$=\lim_{\mathbf{X}\to\mathbf{X}_0}\frac{\mathbf{(XAX^T-XB)}-(\mathbf{X}_0\mathbf{AX}_0^\mathbf{T}-\mathbf{X}_0\mathbf{B})-[(\mathbf{X-X}_0)\mathbf{AX}_0^\mathbf{T}+\mathbf{X}_0\mathbf{A}(\mathbf{X-X}_0)^\mathbf{T}-(\mathbf{X-X}_0)\mathbf{B}]}{\|\mathbf{X}-\mathbf{X}_0\|}$ \\ \vspace{1em}
+$=\lim_{\mathbf{X}\to\mathbf{X}_0}\frac{(\mathbf{X-X}_0)\mathbf{AX^T}-(\mathbf{X-X}_0)\mathbf{AX}_0^\mathbf{T}}{\|\mathbf{X}-\mathbf{X}_0\|}$ \\ \vspace{1em}
+$=\mathbf{0}$ \\ \vspace{1em}
+\end{flushleft}
+
+
+
+
+\end{document}

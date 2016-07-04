@@ -1,0 +1,109 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{nccmath}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{fixmath}
+
+\setlength{\textwidth}{15cm} \setcounter{page}{159}
+
+\begin{document}
+
+
+\title{\textbf{Non-convex Optimization for Analyzing Big Data}\\
+\medskip
+\text{Assignment 2}}
+
+\author{Zhiwei Han}
+\date{Jun 10, 2016}
+\maketitle
+
+
+\setlength{\parindent}{0pt} \setlength{\parskip}{2ex plus 0.5ex
+minus 0.2ex}
+
+
+\section*{Task 1}
+\subsection*{(a)}
+Chain rule:\\
+\begin{equation}
+	D (f \circ g) (x) = D f(g(x)) \circ Dg(x)
+\end{equation}
+
+The directional derivative of composition \( f \circ g\) is:
+\begin{equation}
+\begin{split}
+	D_{v}(f \circ g) (x) = D _{Dg(x)[v]} f(g(x)) \\=Df(g(x))[Dg(x)[v]]
+\end{split}
+\end{equation}
+
+Here given $f:\mathbb{R}^{n} \to \mathbb{R}, \textbf{x} \mapsto \textbf{x}^\intercal \textbf{x}$ and $g:\mathbb{R}^{n} \to \mathbb{R}^{n}, \textbf{z} \mapsto \textbf{A} \textbf{z}$\\
+Choose standard inner product as product in all the spaced used. 
+\begin{displaymath}
+	<\textbf{x}, \textbf{y}>=\textbf{x}^\intercal \textbf{y}
+\end{displaymath}
+
+With the inner product chosen:
+\begin{equation}
+	D_{\textbf{v}}f(\textbf{x})=2\textbf{x}^\intercal \textbf{v}
+\end{equation}
+and
+\begin{equation}
+	D_{\textbf{v}}g(\textbf{z})=\textbf{Av}
+\end{equation}
+Plug into the fomular:
+\begin{equation}
+	D_{v}(f \circ g) (x)=2\textbf{x}^\intercal \text{Av} = < 2\textbf{A}^\intercal \textbf{x},\textbf{v} >
+\end{equation}
+So, 
+\begin{displaymath}
+	\textbf{g}=2\textbf{A}^\intercal \textbf{x}
+\end{displaymath}
+\newpage
+\subsection*{(b)}
+Product rule:\\
+\begin{equation}
+	D_{\textbf{H}}(f \cdot g) (\textbf{X}) = D _{\textbf{H}} f(\textbf{X}) \cdot g(\textbf{X})+ f(\textbf{X})D _{\textbf{H}} \cdot g(\textbf{X})
+\end{equation}
+
+Here given $f:\textrm{skew}_{n} \to \mathbb{R}^{n}, \textbf{X} \mapsto \textbf{X}^\intercal \textbf{a}$ and $g:\textrm{skew}_{n} \to \mathbb{R}^{n}, \textbf{X} \mapsto \textbf{X} \textbf{b}$\\
+The Objectiv function is the multiplication of these two functions:
+\begin{displaymath}
+	h(\textbf{X})=f(\textbf{X})^\intercal \cdot g(\textbf{X})
+\end{displaymath}
+Choose standard inner product as product in all the spaced used. 
+\begin{displaymath}
+	<\textbf{x}, \textbf{y}>=\textbf{x}^\intercal \textbf{y}
+\end{displaymath}
+Here we have:
+\begin{equation}
+	D_{H}h(\textbf(X))=D_{H}f(\textbf{X})^\intercal \cdot g(\textbf{X}) + f(\textbf{X})^\intercal \cdot D_{H}g(\textbf{X})
+\end{equation}
+With the inner product chosen, we have the following directional derivative:
+\begin{equation}
+	D_{H}f(\textbf{X})^\intercal=\textbf{a}^\intercal \textbf{H}
+\end{equation}
+and
+\begin{equation}
+	D_{H}g(\textbf{X})=\textbf{H} \textbf{b}
+\end{equation}
+Plug into the fomular:
+\begin{equation}
+\begin{split}
+	D_{H}h(\textbf(X))=\textbf{a}^\intercal \textbf{H} \textbf{X} \textbf{b} + \textbf{a}^\intercal \textbf{X} \textbf{H} \textbf{b}\\
+	=-<\textbf{H}\textbf{a}, \textbf{X}\textbf{b}>-<\textbf{X}\textbf{a}, \textbf{H}\textbf{b}>\\
+	=<-(\textbf{X}\textbf{b}\textbf{a}^\intercal + \textbf{X}\textbf{a}\textbf{b}^\intercal), \textbf{H}>
+\end{split}
+\end{equation}
+So, 
+\begin{displaymath}
+	\textbf{g}=-(\textbf{X}\textbf{b}\textbf{a}^\intercal + \textbf{X}\textbf{a}\textbf{b}^\intercal)
+\end{displaymath}
+\newpage
+\section*{Task 2}
+Please See the comment in uploaeded matlab file.
+
+\end{document}
